@@ -12,8 +12,8 @@ namespace WebApplication1
     {
         public Startup(IWebHostEnvironment env)
         {
-            using var client = new ApplicationsContext();
-            client.Database.EnsureCreated();
+            using var context = new ApplicationsContext();
+            context.Database.EnsureCreated();
         }
         public void ConfigureServices(IServiceCollection services)
         {
