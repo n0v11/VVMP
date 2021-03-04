@@ -1,0 +1,13 @@
+﻿@model Library.User;
+@{
+    ViewBag.Title = "Удаление пользователя";
+}
+<form asp-action="delete" asp-controller="home">
+    <div class="form-group">
+        <label asp-for="Id" class="control-label">Номер</label>
+        <input type="number" asp-for="Id" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Отправить" class="btn btn-default" />
+    </div>
+</form>
