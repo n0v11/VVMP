@@ -1,16 +1,18 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Library;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly Library.AppContext db = new Library.AppContext();
+        private readonly DbActions _db = new DbActions();
 
         public ActionResult Index()
         {
-            var users = DbActions.Select();
+            var users = _db.Select();
             return View(users);
         }
 
@@ -22,8 +24,15 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult Create(User user)
         {
-            DbActions.Add(user);
-            return RedirectToAction("Index");
+            if (string.IsNullOrWhiteSpace(user.Name) || user.Age <= 0)
+            {
+                return BadRequest("Не введено имя пользователи или возраст равен или менее нуля");
+            }
+            else
+            {
+                _db.Add(user);    
+                return RedirectToAction("Index");
+            }
         }
 
         public IActionResult Delete()
@@ -36,35 +45,13 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                DbActions.Delete(id);
+                _db.Delete(id);
                 return RedirectToAction("Index");
             }
             catch
             {
-                return RedirectToAction("Index");
+                return BadRequest("Введен неверный индекс элемента");
             }
         }
-        //private readonly ILogger<HomeController> _logger;
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
-
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
     }
 }

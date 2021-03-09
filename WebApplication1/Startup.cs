@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Library;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApplication1
 {
@@ -12,7 +13,7 @@ namespace WebApplication1
     {
         public Startup(IWebHostEnvironment env)
         {
-            using var context = new ApplicationsContext();
+            using ApplicationsContext context = new ApplicationsContext();
             context.Database.EnsureCreated();
         }
         public void ConfigureServices(IServiceCollection services)
@@ -27,6 +28,14 @@ namespace WebApplication1
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // обработка ошибок HTTP
+            app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
+
+            app.Map("/error", ap => ap.Run(async context =>
+            {
+                await context.Response.WriteAsync($"Error: {context.Request.Query["code"]}");
+            }));
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

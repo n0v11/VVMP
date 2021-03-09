@@ -9,7 +9,7 @@ namespace Library
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source=..\Library\testdb.db"); // используется sqlite
+            optionsBuilder.UseSqlite(@"Data Source=../Library/testdb.db"); // используется sqlite
         }
         public DbSet<User> Users { get; set; }
     }
