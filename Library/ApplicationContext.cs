@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Library
 {
-    public class ApplicationsContext : DbContext
+    public class ApplicationContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

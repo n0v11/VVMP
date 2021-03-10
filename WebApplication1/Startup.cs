@@ -13,11 +13,11 @@ namespace WebApplication1
     {
         public Startup(IWebHostEnvironment env)
         {
-            using ApplicationsContext context = new ApplicationsContext();
+            using ApplicationContext context = new ApplicationContext();
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEntityFrameworkSqlite().AddDbContext<ApplicationsContext>();
+            services.AddEntityFrameworkSqlite().AddDbContext<ApplicationContext>();
             services.AddControllersWithViews();
         }
 

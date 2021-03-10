@@ -8,7 +8,7 @@ namespace CoreAppWithEf
 {
     class Program
     {
-        static void Main() // В процессе
+        static void Main()
         {
             DbActions db = new DbActions();
             while (true)
@@ -35,7 +35,7 @@ namespace CoreAppWithEf
                             Console.Write("Введите имя ");
                             newUser.Name = Console.ReadLine();
                             Console.Write("\nВведите возраст ");
-                            newUser.Age = int.Parse(Console.ReadLine() ?? string.Empty);
+                            newUser.Age = int.Parse(Console.ReadLine());
                             db.Add(newUser);
                         }
                         catch

@@ -8,7 +8,7 @@ namespace Library
 {
     public class DbActions
     {
-        private static readonly ApplicationsContext db = new ApplicationsContext();
+        private static readonly ApplicationContext db = new ApplicationContext();
 
         public List<User> Select()
         {
