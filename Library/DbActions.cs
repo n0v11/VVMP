@@ -12,6 +12,7 @@ namespace Library
 
         public List<User> Select()
         {
+            db.Database.EnsureCreated(); // Создание базы если на момент запуска ее не существует.
             return db.Users.ToList();
         }
 

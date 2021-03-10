@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-        <StartWorkingDirectory>$(MSBuildProjectDirectory)</StartWorkingDirectory>    
+    <TargetFramework>net5.0</TargetFramework>
+        <StartWorkingDirectory>$(MSBuildProjectDirectory)</StartWorkingDirectory>
+        <StartupObject>CoreAppWithEf.Program</StartupObject>    
   </PropertyGroup>
 
   <ItemGroup>
