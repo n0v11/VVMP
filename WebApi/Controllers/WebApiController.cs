@@ -8,28 +8,28 @@ using Microsoft.AspNetCore.Mvc;
 using Library;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApplication1.Controllers
+namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    [Route("api/[controller]")]
+    public class WebApiController : ControllerBase
     {
         private readonly DbActions _db = new DbActions();
         private readonly ApplicationContext _context;
 
-        public UserController(ApplicationContext context)
+        public WebApiController(ApplicationContext context)
         {
             _context = context;
         }
 
-        // GET: api/User
+        // GET: api/WebApi
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/User/5
+        // GET: api/WebApi/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -43,7 +43,7 @@ namespace WebApplication1.Controllers
             return user;
         }
 
-        // PUT: api/User/5
+        // PUT: api/WebApi/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
@@ -72,7 +72,7 @@ namespace WebApplication1.Controllers
             return NoContent();
         }
 
-        // POST: api/User  Body/raw/JSON
+        // POST: api/WebApi  Body/raw/JSON
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
@@ -82,7 +82,7 @@ namespace WebApplication1.Controllers
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/User/5
+        // DELETE: api/WebApi/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

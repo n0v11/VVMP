@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# IDE0090: Используйте "new(...)".
+dotnet_diagnostic.IDE0090.severity = none
+
+# IDE0060: Удалите неиспользуемый параметр
+dotnet_diagnostic.IDE0060.severity = none
