@@ -45,30 +45,15 @@ namespace WebApi.Controllers
 
         // PUT: api/WebApi/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<ActionResult<User>> PutUser(int id, User newUserData)
         {
-            if (id != user.Id)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _db.Edit(id, user);
             return NoContent();
         }
 
@@ -77,7 +62,6 @@ namespace WebApi.Controllers
         public async Task<ActionResult<User>> PostUser(User user)
         {
             _db.Add(user);
-            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }

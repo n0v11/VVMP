@@ -35,6 +35,25 @@ namespace WebApplication1.Controllers
             }
         }
 
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int? id, User user)
+        {
+            if (string.IsNullOrWhiteSpace(user.Name) || user.Age <= 0)
+            {
+                return BadRequest("Не введено имя пользователи или возраст равен или менее нуля");
+            }
+            else
+            {
+                _db.Edit(id, user);
+                return RedirectToAction("Index");
+            }
+        }
+
         public IActionResult Delete()
         {
             return View();

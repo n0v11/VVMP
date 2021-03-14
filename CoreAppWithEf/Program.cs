@@ -22,7 +22,7 @@ namespace CoreAppWithEf
                 Console.WriteLine(@"
 Выберите действие:
 1.Добавить элемент
-2.Изменить элемент (недоступно)
+2.Изменить элемент
 3.Удалить элемент
 4.Выйти из приложения");
                 string ans = Console.ReadLine();
@@ -46,6 +46,21 @@ namespace CoreAppWithEf
                         Console.Clear();
                         break;
                     case "2": // Изменение элемента
+                        try
+                        {
+                            Console.WriteLine("Введите id элемента");
+                            int id = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Введите новое имя элемента, а следом новый возраст");
+                            string name = Console.ReadLine();
+                            int age = int.Parse(Console.ReadLine() ?? string.Empty);
+                            User newUserData = new() {Name = name, Age = age};
+                            db.Edit(id, newUserData);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Некорректный ввод");
+                            Console.ReadKey();
+                        }
                         Console.Clear();
                         break;
                     case "3": // Удаление элемента

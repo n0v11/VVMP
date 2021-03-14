@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Library
 {
@@ -25,6 +26,14 @@ namespace Library
         public void Delete(int? id) // Удаление по id с проверкой на null 
         {
             db.Users.Remove(db.Users.FirstOrDefault(p => p.Id == id));
+            db.SaveChanges();
+        }
+
+        public void Edit(int? id, User newDataUser)
+        {
+            User user = db.Users.FirstOrDefault(x => x.Id == id);
+            user.Name = newDataUser.Name;
+            user.Age = newDataUser.Age;
             db.SaveChanges();
         }
     }
